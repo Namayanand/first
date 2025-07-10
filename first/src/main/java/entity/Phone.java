@@ -21,7 +21,7 @@ public class Phone {
 	public String phname;
 	@Column(name = "brand", nullable = false)
 	public String brand;
-	@Column(name = "model", nullable = false)
+	@Column(name = "model", nullable = true)
 	public String model;
 	@Column(name = "price", nullable = false)
 	public String price;

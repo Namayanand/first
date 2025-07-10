@@ -40,10 +40,6 @@ import jakarta.persistence.Column;
 	@AttributeOverride(
 			name = "SPEAKER",
 			column = @Column(name = "speaker")
-	),
-	@AttributeOverride(
-			name = "CALLSPEAKER",
-			column = @Column(name = "callspeaker")
 	)
 })
 public class Advanceinfo {
@@ -54,5 +50,4 @@ public class Advanceinfo {
 	private String BLUETOOTH;
 	private String PROCESSOR;
 	private String SPEAKER;
-	private String CALLSPEAKER;
 }

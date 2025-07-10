@@ -11,7 +11,6 @@ public interface Phonerepo extends JpaRepository<Phone, String> {
 	List<Phone> findByModel(String model);
 	List<Phone> findByPhnameContaining(String phname);
 	Optional<Phone> findByPhname(String phname);
-
 	String getPhoneNameByBrand(String string);
 	List<Phone> findByAdvanceInfoRAM(String string);
 }
