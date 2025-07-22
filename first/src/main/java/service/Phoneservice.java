@@ -18,7 +18,7 @@ public class Phoneservice {
 	}
 	
 	public Phone savePhoneWithAdvancedInfo( Phone Phone, Advanceinfo AdvanceInfo) {
-        return phoneRepo.save(Phone);
+       return phoneRepo.save(Phone);
     }
 	
 	public List<Phone> printAllPhones() {
@@ -26,9 +26,9 @@ public class Phoneservice {
         return phoneList;
     }
 	
-    public List<Phone> printPhonesByName() {
+    public List<Phone> printPhonesByName(String phname) {
     	System.out.println("Fetching phone by name");
-        Optional<Phone> phones = phoneRepo.findById("iPhone 14");
+        Optional<Phone> phones = phoneRepo.findById(phname);
         return phones.isPresent() ? List.of(phones.get()) : List.of();
     }
    	
@@ -47,7 +47,13 @@ public class Phoneservice {
         List<Phone> phone = phoneRepo.findByBrand("Apple");
         return phone;
     }
-	
+	public void changePhoneByBrand(String brand) {
+		List<Phone> phone = phoneRepo.findByBrand(brand);
+		for (Phone p : phone) {
+			p.setBrand("Samsung");
+			phoneRepo.save(p);
+		}
+	}
 	public String printPhoneNameByBrand() {
         String firstName = phoneRepo.getPhoneNameByBrand("");
         return firstName;

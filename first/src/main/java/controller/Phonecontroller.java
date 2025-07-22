@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import service.Phoneservice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import entity.Phone;
+import entity.Advanceinfo;
+import java.util.List;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 @RequestMapping("/demodb")
 public class Phonecontroller {
@@ -16,35 +20,35 @@ public class Phonecontroller {
 	public void createPhone(@RequestBody Phone newPhone) {
 		phoneService.savePhone(newPhone);
 	}
-//	@PostMapping("/phones/advanced")
-//	public void createPhoneWithAdvancedInfo(@RequestBody Phone newPhone, @RequestBody Advanceinfo advanceInfo) {
-//		phoneService.savePhoneWithAdvancedInfo(newPhone,advanceInfo); 	}
+	@PostMapping("/phones/advanced")
+	public void createPhoneWithAdvancedInfo(@RequestBody Phone newPhone, @RequestBody Advanceinfo advanceInfo) {
+		phoneService.savePhoneWithAdvancedInfo(newPhone,advanceInfo); 	}
 	@GetMapping("/phones/all")
-	public void printAllPhones() {
-		phoneService.printAllPhones();
+	public List<Phone> printAllPhones() {
+		return phoneService.printAllPhones();
 	}
 	@GetMapping("/phones/name")
-	public void printPhonesByName() {
-		phoneService.printPhonesByName();
+	public List<Phone> printPhonesByName(@PathVariable("phname") String phname) {
+		return phoneService.printPhonesByName(phname);
 	}
 	@GetMapping("/phones/contains")
-	public void printPhonesByFirstNameContaining() {
-		phoneService.printPhonesByFirstNameContaining();
+	public List<Phone> printPhonesByFirstNameContaining() {
+		return phoneService.printPhonesByFirstNameContaining();
 	}
 	@GetMapping("/phones/advancedinfo")
-	public void printPhonesBasedOnAdvancedInfoName() {
-		phoneService.printPhonesBasedOnAdvancedInfoName();
+	public List<Phone> printPhonesBasedOnAdvancedInfoName() {
+		return phoneService.printPhonesBasedOnAdvancedInfoName();
 	}
 	@GetMapping("/phones/brand")
-	public void printPhoneByBrand() {
-		phoneService.printPhoneByBrand();
+	public List<Phone> printPhoneByBrand(@RequestBody String brand) {
+		return phoneService.printPhoneByBrand();
 	}
-	@GetMapping("/phones/brandname")
-	public void printPhoneNameByBrand() {
-		phoneService.printPhoneNameByBrand();
+	@PutMapping("/phones/{brand}")
+	public void updatePhoneByBrand(@PathVariable("brand") @RequestBody String brand) {
+		phoneService.changePhoneByBrand(brand);
 	}
 	@GetMapping("/phones/model")
-	public void printPhoneByModel() {
-		phoneService.printPhoneByModel();
+	public List<Phone> printPhoneByModel() {
+		return phoneService.printPhoneByModel();
 	}
 }

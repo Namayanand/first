@@ -8,13 +8,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+import java.util.List;
+import entity.Delivery;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "phone")
+@Table(name = "phones")
 public class Phone {
 	@Id
 	@Column(name = "phname", nullable = false, unique = true) 
@@ -27,12 +33,12 @@ public class Phone {
 	public String price;
 	@Embedded
 	private Advanceinfo advanceInfo;
-//	@ManyToMany(cascade = CascadeType.ALL)
-//	@JoinTable(name = "phone_delivery",
-//	           joinColumns = @JoinColumn(name = "phone", referencedColumnName = "phname"),
-//	           inverseJoinColumns = @JoinColumn(name = "delivery", referencedColumnName = "delseq"))
-//	private List<delivery> deliveries;
-//	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "phone_delivery",
+	           joinColumns = @JoinColumn(name = "phone", referencedColumnName = "phname"),
+	           inverseJoinColumns = @JoinColumn(name = "delivery", referencedColumnName = "delseq"))
+	private List<Delivery> deliveries;
+	
 	public void setPhname(String phname) {
 		this.phname = phname;
 	}
